@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131214204520) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "channels", force: true do |t|
     t.integer  "user_id"
     t.integer  "type_id"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20131214204520) do
     t.datetime "updated_at"
   end
 
-  add_index "channels", ["type_id"], name: "index_channels_on_type_id"
-  add_index "channels", ["user_id"], name: "index_channels_on_user_id"
+  add_index "channels", ["type_id"], name: "index_channels_on_type_id", using: :btree
+  add_index "channels", ["user_id"], name: "index_channels_on_user_id", using: :btree
 
   create_table "messages", force: true do |t|
     t.string   "quote"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 20131214204520) do
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["type_id"], name: "index_messages_on_type_id"
+  add_index "messages", ["type_id"], name: "index_messages_on_type_id", using: :btree
 
   create_table "types", force: true do |t|
     t.string   "message_type"
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(version: 20131214204520) do
     t.string   "name"
     t.string   "email"
     t.string   "password"
-    t.string   "time"
+    t.time     "time"
     t.integer  "key"
     t.datetime "created_at"
     t.datetime "updated_at"
