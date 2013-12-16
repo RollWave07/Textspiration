@@ -1,0 +1,66 @@
+  [1m[36m (1.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (1.8ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20131214204339)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "phone" integer, "name" varchar(255), "email" varchar(255), "password" varchar(255), "time" varchar(255), "key" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131214204339"]]
+  [1m[36m (1.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTypes (20131214204433)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "message_type" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131214204433"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateChannels (20131214204457)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "channels" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "type_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.4ms)[0m  CREATE INDEX "index_channels_on_user_id" ON "channels" ("user_id")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_channels_on_type_id" ON "channels" ("type_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131214204457"]]
+  [1m[36m (1.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateMessages (20131214204520)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "messages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "quote" varchar(255), "type_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_messages_on_type_id" ON "messages" ("type_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20131214204520"]]
+  [1m[35m (1.8ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mUser Load (2.7ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (25.4ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "name", "phone", "time", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["created_at", Sat, 14 Dec 2013 20:52:38 UTC +00:00], ["email", "alice@alice.com"], ["name", "Alice"], ["phone", 1234567890], ["time", "7:30am"], ["updated_at", Sat, 14 Dec 2013 20:52:38 UTC +00:00]]
+  [1m[35m (2.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "types" ("created_at", "message_type", "updated_at") VALUES (?, ?, ?)  [["created_at", Sat, 14 Dec 2013 20:53:06 UTC +00:00], ["message_type", "fitness"], ["updated_at", Sat, 14 Dec 2013 20:53:06 UTC +00:00]]
+  [1m[36m (2.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "messages" ("created_at", "quote", "updated_at") VALUES (?, ?, ?)[0m  [["created_at", Sat, 14 Dec 2013 20:54:16 UTC +00:00], ["quote", "Run faster!"], ["updated_at", Sat, 14 Dec 2013 20:54:16 UTC +00:00]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mType Load (0.3ms)[0m  SELECT "types".* FROM "types" ORDER BY "types"."id" ASC LIMIT 1
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "channels" ON "types"."id" = "channels"."type_id" WHERE "channels"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35mType Load (0.3ms)[0m  SELECT "types".* FROM "types"
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" WHERE "types"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mMessage Load (0.2ms)[0m  SELECT "messages".* FROM "messages"
+  [1m[36mMessage Load (0.3ms)[0m  [1mSELECT "messages".* FROM "messages" ORDER BY "messages"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "messages" SET "type_id" = ?, "updated_at" = ? WHERE "messages"."id" = 1[0m  [["type_id", 1], ["updated_at", Sat, 14 Dec 2013 20:58:18 UTC +00:00]]
+  [1m[35m (1.6ms)[0m  commit transaction
+  [1m[36mMessage Load (0.4ms)[0m  [1mSELECT "messages".* FROM "messages" WHERE "messages"."type_id" = ?[0m  [["type_id", 1]]
+  [1m[35mChannel Load (0.3ms)[0m  SELECT "channels".* FROM "channels"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "types" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", Sat, 14 Dec 2013 20:59:59 UTC +00:00], ["updated_at", Sat, 14 Dec 2013 20:59:59 UTC +00:00]]
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "channels" ("created_at", "type_id", "updated_at", "user_id") VALUES (?, ?, ?, ?)[0m  [["created_at", Sat, 14 Dec 2013 20:59:59 UTC +00:00], ["type_id", 2], ["updated_at", Sat, 14 Dec 2013 20:59:59 UTC +00:00], ["user_id", 1]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types" WHERE "types"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.9ms)[0m  [1mUPDATE "types" SET "message_type" = ?, "updated_at" = ? WHERE "types"."id" = 2[0m  [["message_type", "financial"], ["updated_at", Sat, 14 Dec 2013 21:01:11 UTC +00:00]]
+  [1m[35m (2.8ms)[0m  commit transaction
+  [1m[36mType Load (0.3ms)[0m  [1mSELECT "types".* FROM "types"[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mChannel Load (0.3ms)[0m  [1mSELECT "channels".* FROM "channels"[0m
+  [1m[35mType Load (0.3ms)[0m  SELECT "types".* FROM "types"
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mChannel Load (0.3ms)[0m  SELECT "channels".* FROM "channels"
+  [1m[36mMessage Load (0.3ms)[0m  [1mSELECT "messages".* FROM "messages"[0m
+  [1m[35mType Load (0.4ms)[0m  SELECT "types".* FROM "types" INNER JOIN "channels" ON "types"."id" = "channels"."type_id" WHERE "channels"."user_id" = ? AND "types"."id" = ? LIMIT 1  [["user_id", 1], ["id", 2]]
+  [1m[36mType Load (0.8ms)[0m  [1mSELECT "types".* FROM "types" INNER JOIN "channels" ON "types"."id" = "channels"."type_id" WHERE "channels"."user_id" = ? AND "types"."id" = ? LIMIT 1[0m  [["user_id", 1], ["id", 2]]
