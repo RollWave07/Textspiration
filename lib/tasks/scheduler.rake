@@ -30,7 +30,7 @@ task :text => :environment do
 end
 
 task :time => :environment do
-  puts Time.now.strftime("%I:%M%p")
+  puts Time.now.in_time_zone("Central Time (US & Canada)").strftime("%I:%M%p")
 end
 
 # task :greet do
