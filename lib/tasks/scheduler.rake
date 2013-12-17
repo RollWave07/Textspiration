@@ -16,7 +16,7 @@ desc "Attemping to use the scheduler to send a text at a certain time based on a
 task :text => :environment do
 
   User.all.each do |user|
-      # if user.time == Time.now.strftime("%I:%M%p")
+      if user.time == Time.now.strftime("%I:%M%p")
         twilio_sid = ENV['TWILIO_SID']
         twilio_token = ENV['TWILIO_TOKEN']
         twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
@@ -25,22 +25,22 @@ task :text => :environment do
           :from => "+1#{twilio_phone_number}",
           :to => user.phone,
           :body => "This is a test set for 7:30 PM")
-      # end
+      end
     end
 end
 
-task :greet do
-  puts "hello"
-end
+# task :greet do
+#   puts "hello"
+# end
 
-task :env_test => :environment do
- twilio_sid = ENV['TWILIO_SID']
- twilio_token = ENV['TWILIO_TOKEN']
- twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
- puts "twilio_sid=#{twilio_sid}"
- puts "twilio_token=#{twilio_token}"
- puts "twilio_phone_number=#{twilio_phone_number}"
-end
+# task :env_test => :environment do
+#  twilio_sid = ENV['TWILIO_SID']
+#  twilio_token = ENV['TWILIO_TOKEN']
+#  twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
+#  puts "twilio_sid=#{twilio_sid}"
+#  puts "twilio_token=#{twilio_token}"
+#  puts "twilio_phone_number=#{twilio_phone_number}"
+# end
 
     # messages_to_send = Message.where("sent= ? AND time <= ?", false, Time.now)
   # messages_to_send.each do |message|
