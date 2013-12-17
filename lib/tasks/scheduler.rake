@@ -13,8 +13,7 @@
 
 desc "Attemping to use the scheduler to send a text at a certain time based on a user"
 
-task :send_textspiration => :environment do
-  t = Time.now
+task :text => :environment do
 
   User.all.each do |user|
       if user.time == Time.now.strftime("%I:%M%p")
@@ -28,7 +27,11 @@ task :send_textspiration => :environment do
           :body => "This is a test set for 7:30 PM")
       end
     end
-  end
+end
+
+task :greet do
+  puts "hello"
+end
 
     # messages_to_send = Message.where("sent= ? AND time <= ?", false, Time.now)
   # messages_to_send.each do |message|
