@@ -29,6 +29,10 @@ task :text => :environment do
     end
 end
 
+task :time => :environment do
+  puts Time.now.strftime("%I:%M%p")
+end
+
 # task :greet do
 #   puts "hello"
 # end
