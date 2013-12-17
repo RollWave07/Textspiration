@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :password
-      t.time :time
+      t.time with time zone :time
       t.integer :key
 
       t.timestamps

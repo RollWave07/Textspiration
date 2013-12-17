@@ -165,3 +165,21 @@ Migrating to AddPhoneToUser (20131217004817)
   [1m[36mUser Load (1.9ms)[0m  [1mSELECT "users".* FROM "users"[0m
   [1m[36mUser Load (1.9ms)[0m  [1mSELECT "users".* FROM "users"[0m
   [1m[36mUser Load (2.0ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (34.1ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mUser Load (24.7ms)[0m  [1mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (12.6ms)[0m  [1mUPDATE "users" SET "phone" = $1, "updated_at" = $2 WHERE "users"."id" = 1[0m  [["phone", 8588869929], ["updated_at", Tue, 17 Dec 2013 17:21:42 UTC +00:00]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36mUser Load (1.9ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (11.4ms)[0m  INSERT INTO "users" ("created_at", "time", "updated_at") VALUES ($1, $2, $3) RETURNING "id"  [["created_at", Tue, 17 Dec 2013 17:26:54 UTC +00:00], ["time", 2000-01-01 07:30:00 UTC], ["updated_at", Tue, 17 Dec 2013 17:26:54 UTC +00:00]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (1.9ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE "users" SET "time" = $1, "updated_at" = $2 WHERE "users"."id" = 2  [["time", 2000-01-01 08:30:00 UTC], ["updated_at", Tue, 17 Dec 2013 17:29:36 UTC +00:00]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (36.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

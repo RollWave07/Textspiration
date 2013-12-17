@@ -6,6 +6,8 @@ gem 'rails', '4.0.2'
 #twilio stuff
 gem 'twilio-ruby'
 
+gem 'figaro'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
