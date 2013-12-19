@@ -15,11 +15,13 @@ desc "Attemping to use the scheduler to send a text at a certain time based on a
 
 task :text => :environment do
 
-time_in_float = Time.now.hour + (Time.now.min/60.to_f)
+time_in_float = Time.now.in_time_zone("Central Time (US & Canada)").hour + (Time.now.in_time_zone("Central Time (US & Canada)").min/60.to_f)
+
+# time_in_float = Time.now.hour + (Time.now.min/60.to_f)
 users = User.where(time: (time_in_float-0.4)..(time_in_float+0.4))
 
   users.each do |user|
-      if user.time > (time_in_float - 0.4) && user.time < (time_in_float + 0.4)
+
         twilio_sid = ENV['TWILIO_SID']
         twilio_token = ENV['TWILIO_TOKEN']
         twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
@@ -29,7 +31,6 @@ users = User.where(time: (time_in_float-0.4)..(time_in_float+0.4))
           :to => user.phone,
           :body => "This is a test text")
       end
-    end
 end
 
 task :time => :environment do
