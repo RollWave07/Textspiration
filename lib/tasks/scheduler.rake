@@ -15,10 +15,11 @@ desc "Attemping to use the scheduler to send a text at a certain time based on a
 
 task :text => :environment do
 
-  t = Time.now.strftime("%I:%M%p")
+time_in_float = Time.now.hour + (Time.now.min/60.to_f)
+users = User.where(time: (time_in_float-0.4)..(time_in_float+0.4))
 
-  User.all.each do |user|
-      if Time.parse(user.time.strftime("%I:%M%p")) < Time.parse(t) + 300 && Time.parse(user.time.strftime("%I:%M%p")) > Time.parse(t) - 300
+  users.each do |user|
+      if user.time > (time_in_float - 0.4) && user.time < (time_in_float + 0.4)
         twilio_sid = ENV['TWILIO_SID']
         twilio_token = ENV['TWILIO_TOKEN']
         twilio_phone_number = ENV['TWILIO_PHONE_NUMBER']
@@ -26,7 +27,7 @@ task :text => :environment do
         @twilio_client.account.sms.messages.create(
           :from => "+1#{twilio_phone_number}",
           :to => user.phone,
-          :body => "This is a test set for 8:20 PM")
+          :body => "This is a test text")
       end
     end
 end

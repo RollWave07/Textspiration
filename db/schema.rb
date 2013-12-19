@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20131217004817) do
     t.string   "name"
     t.string   "email"
     t.string   "password"
-    t.time     "time"
+    t.float    "time"
     t.integer  "key"
     t.datetime "created_at"
     t.datetime "updated_at"
