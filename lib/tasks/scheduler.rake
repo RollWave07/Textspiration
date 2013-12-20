@@ -29,7 +29,7 @@ users = User.where(time: (time_in_float-0.4)..(time_in_float+0.4))
         @twilio_client.account.sms.messages.create(
           :from => "+1#{twilio_phone_number}",
           :to => user.phone,
-          :body => "You, #{user.name}, are a fantastic human being!")
+          :body => "#{user.name}, you're going to kick today in the teeth! Smile! Love, Textspiration")
       end
 end
 
