@@ -1,0 +1,10 @@
+I'm a user page
+
+<%= @user.email %>
+
+<h3>You are subscribed to Textspirations of the type:</h3>
+<ul>
+  <% @types.each do |type| %>
+    <li><%= type.message_type %></li>
+  <% end %>
+</ul>

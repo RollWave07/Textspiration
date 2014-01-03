@@ -8,6 +8,9 @@ gem 'twilio-ruby'
 
 gem 'figaro'
 
+# Use Devise for user authentication
+gem 'devise'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

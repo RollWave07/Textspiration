@@ -1,0 +1,9 @@
+<%= form_for @types %>
+  
+  <div><%= f.label :types, "Types of textspiration" %><br />
+    <% resource.types.each do |type| %>
+      <%= f.radio_button :types, "types" %>
+      <%= f.label "#{type.message_type}", :autofocus => true %></div>
+  <% end %>
+
+<% end %>
