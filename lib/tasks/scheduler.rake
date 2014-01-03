@@ -33,9 +33,9 @@ users = User.where(time: (time_in_float-0.4)..(time_in_float+0.4))
       end
 end
 
-task :time => :environment do
-  puts Time.now.in_time_zone("Central Time (US & Canada)").strftime("%I:%M%p")
-end
+# task :time => :environment do
+#   puts Time.now.in_time_zone("Central Time (US & Canada)").strftime("%I:%M%p")
+# end
 
 # task :greet do
 #   puts "hello"
