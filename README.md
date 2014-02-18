@@ -1,4 +1,4 @@
-Textspiration_v2
+Textspiration
 ================
 
-Round 2... FIGHT!!!!
+Textspiration delivers one inspiring quote per day directly to your pocket, at a time of your choosing.
